@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
+Route::view('/', 'kowri');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
