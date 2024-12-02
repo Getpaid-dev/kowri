@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kowri</title>
+    <link rel="shortcut icon" href="{{ Storage::url('images/logo.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -64,7 +65,7 @@
                     <h1 class="lg:text-6xl text-xl lg:font-bold  font-semibold">Increase your <br /> Business Revenue</h1>
                     <p class="tracking-wider text-md text-pretty max-w-60 lg:max-w-fit">Receive payments from all mobile money wallets and cards</p>
                     <div class="flex bg-limeGreen rounded-sm lg:font-semibold lg:py-2 font-normal lg:px-4 py-2 px-2 max-w-fit items-center">
-                        <a href="" class=" lg:text-2xl text-md">Sign Up</a>
+                        <a href="{{ route('register') }}" class=" lg:text-2xl text-md">Sign Up</a>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class=" size-6">
                             <path fill-rule="evenodd" d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                         </svg>
@@ -84,13 +85,13 @@
             <!-- Section 1: Promo Image & Title/Text -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:space-y-0 space-y-28">
                 <!-- Promo Image Section -->
-                <div class="flex justify-center lg:justify-start">
-                    <img class="object-cover rounded-md w-[500px]" src="{{ Storage::url('public/images/xmas-ad.jpeg') }}" alt="xmasad-logo">
+                <div class="flex justify-center lg:justify-start p-4">
+                    <img class="object-cover rounded-md w-[400px]" src="{{ Storage::url('images/xmas-ad.jpeg') }}" alt="xmasad-logo">
                 </div>
 
                 <!-- Text Section -->
-                <div class="p-4 flex flex-col justify-center items-center lg:items-start">
-                    <h2 class="font-bold text-4xl text-primary mb-4 text-center lg:text-left">Big Rewards Awaits You!</h2>
+                <div class="p-4 flex flex-col items-center lg:items-start">
+                    <h2 class="font-bold text-3xl lg:text-4xl text-primary mb-4 text-center lg:text-left">Big Rewards Awaits You!</h2>
                     <p class="tracking-wider text-gray-800 mb-6 text-xl text-center lg:text-left">
                         <span class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-400 to-green-500 italic text-2xl">
                             DOUBLE YOUR SMALL TOKEN
@@ -99,7 +100,7 @@
                         <br>
                         <span class="italic text-gray-500 mt-4">Ready to make your move?</span>
                     </p>
-                    <a href="#" class="bg-gradient-to-r from-lime-400 to-green-500 px-6 py-2 text-white rounded-sm mt-4">Sign Up</a>
+                    <a href="{{ route('register') }}" class="bg-gradient-to-r from-lime-400 to-green-500 px-6 py-2 text-white rounded-sm mt-4">Sign Up</a>
                 </div>
             </div>
 
@@ -150,7 +151,7 @@
 
         <section class="bg-limeGreen1 p-20 mt-6">
             <div class="text-center flex flex-col ">
-                <h1 class="lg:text-4xl text-2xl lg:font-bold font-semibold text-nowrap">Get started with Kowri today</h1>
+                <h1 class="lg:text-4xl text-2xl lg:font-bold font-semibold text-wrap">Get started with Kowri today</h1>
                 <div class="flex flex-col lg:flex-row  justify-center items-center gap-6 mt-4 divide-y-3 divide-gray-300">
                     <span class="text-green-500 lg:text-lg text-sm py-2 px-4 bg-white rounded-md">Contact Sales</span>
                     <span class="hidden lg:block h-14 w-[1px] bg-gray-500"></span>
@@ -162,47 +163,91 @@
     </main>
 
     <footer>
-    <section class="bg-gray-200 mt-6 p-8">
-        <div class="container mx-auto max-w-6xl text-wrap">
-            <!-- Flex Container for Logo, Social Icons, and Links -->
-            <div class="container mx-auto px-4 py-2 flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0 lg:space-x-12">
-                <!-- Logo Section -->
-                <div class="flex justify-center lg:justify-start w-full lg:w-auto">
-                    <img class="w-[9rem] lg:w-28" src="https://www.kowri.app/wp-content/uploads/2022/06/KowriLogo.png" alt="logo">
-                </div>
-                
-                <!-- Social Icons Section -->
-                <div class="flex justify-center lg:justify-start w-full lg:w-auto">
-                    <div>social icons</div>
-                </div>
+        <section class="bg-gray-200 mt-6 p-8">
+            <div class="container mx-auto max-w-6xl text-wrap">
+                <!-- Flex Container for Logo, Social Icons, and Links -->
+                <div class="container mx-auto px-4 py-2 flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0 lg:space-x-12">
+                    <!-- Logo Section -->
+                    <div class="flex justify-center lg:justify-start w-full lg:w-auto">
+                        <img class="w-[9rem] lg:w-28" src="https://www.kowri.app/wp-content/uploads/2022/06/KowriLogo.png" alt="logo">
+                    </div>
 
-                <!-- Links Section -->
-                <div class="">
-                    <ul class="flex flex-wrap justify-center lg:justify-start space-x-4 text-gray-800">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Promos</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Marketplace</a></li>
-                        <li><a href="#">Merchant API</a></li>
-                    </ul>
+                    <!-- Social Icons Section -->
+                    <div class="flex justify-center lg:justify-start w-full lg:w-auto">
+                        <div>
+                            <ul class="flex justify-center items-center space-x-2">
+                                <li>
+                                    <div class="">
+                                    <ion-icon class="text-green-500 size-7 pt-2" name="logo-facebook"></ion-icon>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <span>
+                                        <ion-icon class="size-6 pt-2 text-green-500" name="logo-twitter"></ion-icon>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <span>
+                                            <svg
+                                                class="text-green-500"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    clip-rule="evenodd"
+                                                    d="M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7ZM9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12Z"
+                                                    fill="currentColor" />
+                                                <path
+                                                    d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"
+                                                    fill="currentColor" />
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    clip-rule="evenodd"
+                                                    d="M5 1C2.79086 1 1 2.79086 1 5V19C1 21.2091 2.79086 23 5 23H19C21.2091 23 23 21.2091 23 19V5C23 2.79086 21.2091 1 19 1H5ZM19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+                                                    fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Links Section -->
+                    <div class="">
+                        <ul class="flex flex-wrap justify-center items-center lg:justify-start space-x-4 text-gray-800">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Promos</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Marketplace</a></li>
+                            <li><a href="#">Merchant API</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer Bottom Section with Privacy and Legal Links -->
-    <section class="lg:h-14 h-auto max-h-20 bg-zinc-800/30">
-        <div class="container mx-auto px-4 py-2">
-            <ul class="flex flex-wrap justify-center lg:justify-end space-x-4 text-zinc-600">
-                <li><a href="#" class="text-right">Privacy Policy</a></li>
-                <li><a href="#">Legal Disclaimer</a></li>
-                <li><a href="#">SEVN Ghana Limited trades as Kowri</a></li>
-            </ul>
-        </div>
-    </section>
-</footer>
-
+        <!-- Footer Bottom Section with Privacy and Legal Links -->
+        <section class="lg:h-14 h-auto max-h-fit bg-zinc-800/30">
+            <div class="container mx-auto px-4 py-2">
+                <ul class="flex flex-wrap justify-center items-center lg:justify-end space-x-4 text-zinc-600">
+                    <li><a href="#" class="text-right">Privacy Policy</a></li>
+                    <li><a href="#">Legal Disclaimer</a></li>
+                    <li><a href="#">SEVN Ghana Limited trades as Kowri</a></li>
+                </ul>
+            </div>
+        </section>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 
