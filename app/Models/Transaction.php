@@ -15,12 +15,14 @@ class Transaction extends Model
         'network_provider',
         'account_number',
         'amount',
+        'balance',
         'token_id',
         'secret_code',
         'wallet_id',
         'transaction_type',
         'user_id',
-        'screenshot', // Added screenshot to the fillable array
+        'screenshot',
+        'status', // Added screenshot to the fillable array
     ];
 
     public function user()

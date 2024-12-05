@@ -13,7 +13,7 @@
                     <input type="text" id="token_id" name="token_id" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                         placeholder="Enter Token ID" 
-                        required minlength="12" maxlength="12">
+                        required minlength="12" maxlength="12"  inputmode="numeric">
                 </div>
 
                 <!-- Secret Code -->
@@ -22,7 +22,8 @@
                     <input type="password" id="secret_code" name="secret_code" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                         placeholder="Enter Secret Code" 
-                        required minlength="4" maxlength="4">
+                        required minlength="4" maxlength="4" pattern="\d{4}"  inputmode="numeric" title="Secret code must be  numeric.">
+                        
                 </div>
 
                 <!-- Wallet ID -->
@@ -31,7 +32,7 @@
                     <input type="text" id="wallet_id" name="wallet_id" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                         placeholder="Enter Wallet ID" 
-                        required pattern="^\d{10}$" title="Wallet ID must be exactly 10 digits.">
+                        required pattern="^\d{10}$" title="Wallet ID must be exactly 10 digits."  inputmode="numeric">
                 </div>
 
                 <!-- Withdrawal Amount -->

@@ -47,7 +47,7 @@
                         placeholder="Enter Account Number" 
                         required 
                         pattern="^\d{10}$" 
-                        title="Account number must be exactly 10 digits">
+                        title="Account number must be exactly 10 digits"  inputmode="numeric">
                 </div>
 
                 <!-- Deposit Amount (Minimum 2500) -->
@@ -55,7 +55,7 @@
                     <label for="withdrawal_amount" class="block text-sm font-semibold text-gray-700">Amount</label>
                     <input type="number" id="withdrawal_amount" name="withdrawal_amount" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        placeholder="Enter Amount" min="2500" required>
+                        placeholder="Enter Amount" min="2500" required  inputmode="numeric">
                     <small class="text-red-500">Amount must be greater than or equal to 2500</small>
                 </div>
 

@@ -52,6 +52,7 @@ class DatabaseSeeder extends Seeder
             $viewTransactions,
             $approveDeposits,
             $viewManagerDashboard,
+            $viewAdminDashboard,
             $changeUserBalance, // Manager can change balance
             $viewOtherUsersTransactions, // Manager can view all users' transactions
         ]);

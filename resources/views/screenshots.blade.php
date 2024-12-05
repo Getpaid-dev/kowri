@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="relative isolate flex min-h-svh w-full max-lg:flex-col">
         <!-- sidebar -->
         <div class="fixed w-64 inset-y-auto left-0 max-lg:hidden ">
@@ -39,7 +38,6 @@
                                 <span>Users</span>
                             </a>
                         </span>
-
                         <span class="relative">
                             <a href="/approvals"
                                 class="flex w-full items-center gap-3 rounded-lg hover:bg-white/5 px-2 py-2.5 text-sm text-left">
@@ -68,8 +66,9 @@
                                 <span>Transactions</span>
                             </a>
                         </span>
+
                         @can('view screenshots')
-                            
+
                         <span class="relative">
                             <a href="/transactions/screenshots"
                                 class="flex w-full items-center gap-3 rounded-lg hover:bg-white/5 px-2 py-2.5 text-sm text-left ">
@@ -87,6 +86,7 @@
                         @endcan
 
 
+
                     </div>
 
 
@@ -95,93 +95,70 @@
             </nav>
         </div>
 
-
-        <!-- main events display -->
         <main class="flex flex-1 flex-col pb-2 lg:pt-2 lg:pl-64 lg:min-w-0 lg:pr-2 text-gray-200">
             <div class="grow lg:p-10 p-6 bg-gray-900 lg:ring-white/10 lg:ring-1 shadow-sm lg:rounded-lg">
-                <div class="mx-auto max-w-6xl">
-                    <div class="mt-8 items-end flex justify-between">
-                        <h2 class="text-base/7 font-semibold sm:text-sm/6">Overview</h2>
-                    </div>
-                    <div class="grid mt-4 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-                        <!-- Users -->
-                        <div>
-                            <hr class="w-full border-t border-white/10">
-                            <div class="mt-6 text-lg/6 font-medium sm:text-sm/6">
-                               Total Users
-                                <div class="mt-3 text-3xl/8 sm:text-2xl/8 font-semibold">{{ $totalUsers }}</div>
-                            </div>
-                        </div>
-                        <!-- Total Deposits -->
-                        <div>
-                            <hr class="w-full border-t border-white/10">
-                            <div class="mt-6 text-lg/6 font-medium sm:text-sm/6">
-                                Actual Deposits
-                                <div class="mt-3 text-3xl/8 sm:text-2xl/8 font-semibold">¢{{ number_format($totalDeposits, 2) }}</div>
-                            </div>
-                        </div>
-                        <!-- Total Withdrawals
-                        <div>
-                            <hr class="w-full border-t border-white/10">
-                            <div class="mt-6 text-lg/6 font-medium sm:text-sm/6">
-                                Total Withdrawals
-                                <div class="mt-3 text-3xl/8 sm:text-2xl/8 font-semibold">{{ number_format($totalWithdrawals, 2) }}</div>
-                            </div>
-                        </div> -->
-                    </div>
+                <h1 class="text-2xl font-semibold mb-6">User Screenshots</h1>
 
-                    <h1 class="mt-14 text-base/7 font-semibold sm:text-sm/6">Recent Transactions</h1>
-                    <div class="flow-root">
-                        <div class="mt-4 overflow-x-auto whitespace-nowrap">
-                            <div class="inline-block min-w-full align-middle">
-                                <table class="min-w-full text-left text-sm/6">
-                                    <thead class="text-zinc-400">
-                                        <tr>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Transaction Date </th>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Time</th>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Token Id</th>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Secret Code</th>
-                                            <th class="text-right border-b px-4 py-2 font-medium border-b-white/10">Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($recentTransactions as $transaction)
-                                        <tr class="bg-gray-800">
-                                            <td class="relative px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->created_at->format('M d, Y ') }}
-                                            </td>
-                                            <td class="relative px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->created_at->format(' h:i a') }}
-                                            </td>
-                                            <td class="text-green-500 relative px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->token_id }}
-                                            </td>
-                                            <td class="relative text-red-500 px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->secret_code }}
-                                            </td>
-                                            <td class="text-right relative px-4 border-b border-gray-300 py-4">
-                                                GH¢{{ number_format($transaction->amount, 2) }}
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr class="bg-gray-800">
-                                            <td colspan="5" class="text-center py-4 text-gray-500">
-                                                No transactions found.
-                                            </td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-
-                                </table>
-
-                            </div>
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    @forelse ($transactions as $transaction)
+                    <div
+                        class="relative bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer"
+                        onclick="showImage('{{ asset('storage/' . $transaction->screenshot) }}')">
+                        <img
+                            src="{{ asset('storage/' . $transaction->screenshot) }}"
+                            alt="Screenshot for transaction {{ $transaction->id }}"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4 text-gray-200">
+                            <h3 class="text-lg font-semibold truncate">{{ $transaction->user->name }}</h3>
+                            <p class="text-sm text-gray-400">
+                                Transaction ID: {{ $transaction->id }}
+                            </p>
+                            <p class="text-sm text-gray-400">
+                                Amount: GHS {{ number_format($transaction->amount, 2) }}
+                            </p>
+                            <p class="text-sm text-gray-400">
+                                Uploaded: {{ $transaction->created_at->format('M d, Y | h:i A') }}
+                            </p>
                         </div>
                     </div>
+                    @empty
+                    <p class="col-span-full text-center text-gray-500">No screenshots available.</p>
+                    @endforelse
+                </div>
+
+                <!-- Full Image Display -->
+                <div
+                    id="fullscreenImage"
+                    class="fixed inset-0 flex items-center justify-center bg-black/75 hidden z-50"
+                    onclick="hideImage()">
+                    <img
+                        id="fullImageElement"
+                        src=""
+                        alt="Full Screenshot"
+                        class="w-auto max-w-[90%] max-h-[80%] rounded-lg shadow-md"
+                        onclick="event.stopPropagation()">
                 </div>
             </div>
         </main>
 
+
+
     </div>
+    <script>
+        function showImage(imageUrl) {
+            const fullscreenContainer = document.getElementById('fullscreenImage');
+            const fullImageElement = document.getElementById('fullImageElement');
+            fullImageElement.src = imageUrl;
+            fullscreenContainer.classList.remove('hidden');
+        }
+
+        function hideImage() {
+            const fullscreenContainer = document.getElementById('fullscreenImage');
+            fullscreenContainer.classList.add('hidden');
+        }
+    </script>
+
+
 
 
 

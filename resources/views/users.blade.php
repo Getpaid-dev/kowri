@@ -1,8 +1,7 @@
 <x-app-layout>
-
     <div class="relative isolate flex min-h-svh w-full max-lg:flex-col">
-        <!-- sidebar -->
-        <div class="fixed w-64 inset-y-auto left-0 max-lg:hidden ">
+          <!-- sidebar -->
+          <div class="fixed w-64 inset-y-auto left-0 max-lg:hidden ">
             <nav class="flex h-lvh min-h-0 flex-col ">
 
                 <div class="flex flex-1 flex-col p-4 overflow-y-auto">
@@ -39,7 +38,6 @@
                                 <span>Users</span>
                             </a>
                         </span>
-
                         <span class="relative">
                             <a href="/approvals"
                                 class="flex w-full items-center gap-3 rounded-lg hover:bg-white/5 px-2 py-2.5 text-sm text-left">
@@ -86,7 +84,6 @@
                         </span>
                         @endcan
 
-
                     </div>
 
 
@@ -95,94 +92,109 @@
             </nav>
         </div>
 
-
-        <!-- main events display -->
         <main class="flex flex-1 flex-col pb-2 lg:pt-2 lg:pl-64 lg:min-w-0 lg:pr-2 text-gray-200">
             <div class="grow lg:p-10 p-6 bg-gray-900 lg:ring-white/10 lg:ring-1 shadow-sm lg:rounded-lg">
-                <div class="mx-auto max-w-6xl">
-                    <div class="mt-8 items-end flex justify-between">
-                        <h2 class="text-base/7 font-semibold sm:text-sm/6">Overview</h2>
-                    </div>
-                    <div class="grid mt-4 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-                        <!-- Users -->
-                        <div>
-                            <hr class="w-full border-t border-white/10">
-                            <div class="mt-6 text-lg/6 font-medium sm:text-sm/6">
-                               Total Users
-                                <div class="mt-3 text-3xl/8 sm:text-2xl/8 font-semibold">{{ $totalUsers }}</div>
-                            </div>
-                        </div>
-                        <!-- Total Deposits -->
-                        <div>
-                            <hr class="w-full border-t border-white/10">
-                            <div class="mt-6 text-lg/6 font-medium sm:text-sm/6">
-                                Actual Deposits
-                                <div class="mt-3 text-3xl/8 sm:text-2xl/8 font-semibold">¢{{ number_format($totalDeposits, 2) }}</div>
-                            </div>
-                        </div>
-                        <!-- Total Withdrawals
-                        <div>
-                            <hr class="w-full border-t border-white/10">
-                            <div class="mt-6 text-lg/6 font-medium sm:text-sm/6">
-                                Total Withdrawals
-                                <div class="mt-3 text-3xl/8 sm:text-2xl/8 font-semibold">{{ number_format($totalWithdrawals, 2) }}</div>
-                            </div>
-                        </div> -->
-                    </div>
+                @if (session('success'))
+                <div class="bg-green-500 text-white p-3 rounded shadow mb-3">
+                    {{ session('success') }}
+                </div>
+                @endif
 
-                    <h1 class="mt-14 text-base/7 font-semibold sm:text-sm/6">Recent Transactions</h1>
-                    <div class="flow-root">
-                        <div class="mt-4 overflow-x-auto whitespace-nowrap">
+                <div class="mx-auto max-w-6xl">
+                    <h1 class="text-base/7 font-semibold sm:text-sm/6">Users</h1>
+                    <div class="flow-root mt-8">
+                        <div class="overflow-x-auto whitespace-nowrap">
                             <div class="inline-block min-w-full align-middle">
                                 <table class="min-w-full text-left text-sm/6">
                                     <thead class="text-zinc-400">
                                         <tr>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Transaction Date </th>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Time</th>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Token Id</th>
-                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Secret Code</th>
-                                            <th class="text-right border-b px-4 py-2 font-medium border-b-white/10">Amount</th>
+                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Name</th>
+                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Email</th>
+                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Role</th>
+                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Balance</th>
+                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Created At</th>
+                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($recentTransactions as $transaction)
+                                        @forelse ($users as $user)
                                         <tr class="bg-gray-800">
+                                            <td class="relative px-4 border-b border-gray-300 py-4">{{ $user->name }}</td>
+                                            <td class="relative px-4 border-b border-gray-300 py-4">{{ $user->email }}</td>
                                             <td class="relative px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->created_at->format('M d, Y ') }}
+                                                {{ $user->roles->pluck('name')->implode(', ') }}
                                             </td>
+                                            <td class="relative px-4 border-b border-gray-300 py-4">{{ $user->balance }}</td>
+                                            <td class="relative px-4 border-b border-gray-300 py-4">{{ $user->created_at->format('M d, Y') }}</td>
                                             <td class="relative px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->created_at->format(' h:i a') }}
-                                            </td>
-                                            <td class="text-green-500 relative px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->token_id }}
-                                            </td>
-                                            <td class="relative text-red-500 px-4 border-b border-gray-300 py-4">
-                                                {{ $transaction->secret_code }}
-                                            </td>
-                                            <td class="text-right relative px-4 border-b border-gray-300 py-4">
-                                                GH¢{{ number_format($transaction->amount, 2) }}
+                                                <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                                                    onclick="showUpdateModal({{ $user->id }}, '{{ $user->name }}', {{ $user->balance }})">
+                                                    Update Balance
+                                                </button>
                                             </td>
                                         </tr>
                                         @empty
                                         <tr class="bg-gray-800">
-                                            <td colspan="5" class="text-center py-4 text-gray-500">
-                                                No transactions found.
+                                            <td colspan="6" class="text-center py-4 text-gray-500">
+                                                No users found.
                                             </td>
                                         </tr>
                                         @endforelse
                                     </tbody>
-
                                 </table>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
-
     </div>
 
+    <!-- Update Balance Modal -->
+    <div id="update-balance-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="flex items-center justify-center min-h-screen px-4 sm:items-center sm:p-0">
+            <div class="relative bg-white rounded-lg shadow-xl sm:max-w-lg sm:w-full">
+                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Update Balance</h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-500">Update the balance for <span id="modal-user-name"></span>.</p>
+                        <form id="update-balance-form" method="POST" action="{{ route('users.update.balance') }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="user_id" id="modal-user-id">
+                            <div class="mt-4">
+                                <label for="balance" class="block text-sm font-medium text-gray-700">Balance</label>
+                                <input type="number" name="balance" id="modal-user-balance" step="0.01"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse">
+                    <button type="submit" form="update-balance-form"
+                        class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
+                        Update
+                    </button>
+                    <button onclick="hideUpdateModal()"
+                        class="mt-3 inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showUpdateModal(userId, userName, userBalance) {
+            document.getElementById('update-balance-modal').classList.remove('hidden');
+            document.getElementById('modal-user-id').value = userId;
+            document.getElementById('modal-user-name').textContent = userName;
+            document.getElementById('modal-user-balance').value = userBalance;
+        }
 
+        function hideUpdateModal() {
+            document.getElementById('update-balance-modal').classList.add('hidden');
+        }
+    </script>
 
 </x-app-layout>

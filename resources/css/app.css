@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Ensure SweetAlert is responsive */
+.my-sweet-alert .swal2-popup {
+    width: 100% !important;
+    max-width: 500px; /* Ensure the max width for larger screens */
+    padding: 15px; /* Add padding */
+}
+
+@media (max-width: 600px) {
+    .my-sweet-alert .swal2-popup {
+        width: 90% !important; /* Make it smaller on mobile */
+    }
+}

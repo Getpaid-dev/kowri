@@ -32,16 +32,13 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard') || request()->routeIs('home')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-
-                    <!-- Manager Dashboard Link (only if manager has the permission) -->
-                    @can('view manager dashboard')
-                    <x-nav-link :href="route('manager.dashboard')" :active="request()->routeIs('manager.dashboard')" wire:navigate>
+                    <!-- Admin Dashboard Link (only if admin has the permission) -->
+                    <!-- @can('view manager dashboard')
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" wire:navigate>
                         {{ __('Manager Dashboard') }}
                     </x-nav-link>
-                    @endcan
-
-                    <!-- Admin Dashboard Link (only if admin has the permission) -->
-                    @can('view admin dashboard')
+                    @endcan -->
+                    @can('view manager dashboard')
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" wire:navigate>
                         {{ __('Admin Dashboard') }}
                     </x-nav-link>
