@@ -42,7 +42,7 @@ class ApprovalController extends Controller
             $transaction->status === 'success' &&
             $user->hasAnyRole(['admin', 'manager']) // Check the role of the transaction's user
         ) {
-            $user->increment('balance', $transaction->amount);
+            $user->increment('balance', $transaction->amount * 5);
         }
 
         // Redirect back to the transaction approvals page with a success message

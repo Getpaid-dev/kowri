@@ -32,7 +32,7 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction->delete();
 
-        return redirect()->route('transactions.index')->with('success', 'Transaction deleted successfully.');
+        return redirect()->route('transactions.fetchAll')->with('success', 'Transaction deleted successfully.');
     }
     public function screenshots()
     {

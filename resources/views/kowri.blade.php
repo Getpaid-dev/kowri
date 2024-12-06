@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kowri</title>
-    <link rel="shortcut icon" href="{{ Storage::url('images/logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ Storage::url('images/kowrilogo.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

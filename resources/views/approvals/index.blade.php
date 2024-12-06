@@ -101,35 +101,33 @@
         @endif
 
         <div class="mx-auto max-w-6xl">
-            <h1 class="text-base/7 font-semibold sm:text-sm/6">Deposits Transaction Approvals</h1>
-            <div class="flow-root mt-8">
-                <div class="overflow-x-auto whitespace-nowrap">
-                    <div class="inline-block min-w-full align-middle">
-                        <table class="min-w-full text-left text-sm/6">
-                            <thead class="text-zinc-400">
-                                <tr>
-                                    <th class="border-b px-4 py-2 font-medium border-b-white/10">User</th>
-                                    <th class="border-b px-4 py-2 font-medium border-b-white/10">Transaction Date</th>
-                                    <th class="border-b px-4 py-2 font-medium border-b-white/10">Time</th>
-                                    <th class="border-b px-4 py-2 font-medium border-b-white/10">Token ID</th>
-                                    <th class="border-b px-4 py-2 font-medium border-b-white/10">Amount</th>
-                                    <th class="border-b px-4 py-2 font-medium border-b-white/10">Status</th>
-                                    <th class="border-b px-4 py-2 font-medium border-b-white/10">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($transactions as $transaction)
-                                @if($transaction->status === 'pending') 
+    <h1 class="text-base/7 font-semibold sm:text-sm/6">Transactions</h1>
+    <div class="flow-root mt-8">
+        <div class="overflow-x-auto whitespace-nowrap">
+            <div class="inline-block min-w-full align-middle">
+                <table class="min-w-full text-left text-sm/6">
+                    <thead class="text-zinc-400">
+                        <tr>
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">User</th>
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Transaction Date</th>
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Time</th>
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Token ID</th>
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Amount</th>
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Transaction Type</th> <!-- New Column -->
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Status</th>
+                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($transactions as $transaction)
+                            @if($transaction->status === 'pending') 
                                 <tr class="bg-gray-800">
                                     <td class="relative px-4 border-b border-gray-300 py-4">{{ $transaction->user->name }}</td>
-                                    <td class="relative px-4 border-b border-gray-300 py-4">
-                                        {{ $transaction->created_at->format('M d, Y') }}
-                                    </td>
-                                    <td class="relative px-4 border-b border-gray-300 py-4">
-                                        {{ $transaction->created_at->format('h:i a') }}
-                                    </td>
+                                    <td class="relative px-4 border-b border-gray-300 py-4">{{ $transaction->created_at->format('M d, Y') }}</td>
+                                    <td class="relative px-4 border-b border-gray-300 py-4">{{ $transaction->created_at->format('h:i a') }}</td>
                                     <td class="text-green-500 relative px-4 border-b border-gray-300 py-4">{{ $transaction->token_id }}</td>
                                     <td class="relative px-4 border-b border-gray-300 py-4">¢{{ $transaction->amount }}</td>
+                                    <td class="relative px-4 border-b border-gray-300 py-4">{{ ucfirst($transaction->transaction_type) }}</td> <!-- Display Transaction Type -->
                                     <td class="relative px-4 border-b border-gray-300 py-4">{{ ucfirst($transaction->status) }}</td>
                                     <td class="relative px-4 border-b border-gray-300 py-4">
                                         <button class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
@@ -138,20 +136,19 @@
                                         </button>
                                     </td>
                                 </tr>
-                                @endif
-                                @empty
-                                <tr class="bg-gray-800">
-                                    <td colspan="7" class="text-center py-4 text-gray-500">
-                                        No pending transactions found.
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            @endif
+                        @empty
+                            <tr class="bg-gray-800">
+                                <td colspan="8" class="text-center py-4 text-gray-500">No pending transactions found.</td> <!-- Adjusted colspan -->
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+</div>
+
     </div>
 </main>
 

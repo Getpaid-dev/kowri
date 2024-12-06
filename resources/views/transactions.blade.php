@@ -116,6 +116,7 @@
                                             <th class="border-b px-4 py-2 font-medium border-b-white/10">Transaction Date</th>
                                             <th class="border-b px-4 py-2 font-medium border-b-white/10">Time</th>
                                             <th class="border-b px-4 py-2 font-medium border-b-white/10">Token ID</th>
+                                            <th class="border-b px-4 py-2 font-medium border-b-white/10">Transaction Type</th>
                                             <th class="border-b px-4 py-2 font-medium border-b-white/10">Amount</th>
                                             <th class="border-b px-4 py-2 font-medium border-b-white/10">Status</th>
                                             <th class="border-b px-4 py-2 font-medium border-b-white/10">Actions</th>
@@ -132,6 +133,7 @@
                                                 {{ $transaction->created_at->format(' h:i a') }}
                                             </td>
                                             <td class="text-green-500 relative px-4 border-b border-gray-300 py-4">{{ $transaction->token_id }}</td>
+                                            <td class="relative px-4 border-b border-gray-300 py-4">{{ ucfirst($transaction->transaction_type) }}</td>
                                             <td class="relative px-4 border-b border-gray-300 py-4">¢{{ $transaction->amount }}</td>
                                             <td class="relative px-4 border-b border-gray-300 py-4">{{ ucfirst($transaction->status) }}</td>
                                             <td class="relative px-4 border-b border-gray-300 py-4">
@@ -176,7 +178,7 @@
                                         class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm">
                                         Delete
                                     </button>
-                                    <button onclick="hideDeleteModal()"
+                                    <button type="button" onclick="hideDeleteModal()"
                                         class="mt-3 inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
                                         Cancel
                                     </button>
@@ -196,6 +198,7 @@
             document.getElementById('delete-modal').classList.remove('hidden');
             document.getElementById('modal-user-name').textContent = userName;
             document.getElementById('modal-transaction-id').value = transactionId;
+            // Ensure this is set correctly
             document.getElementById('delete-form').action = '/transactions/' + transactionId;
         }
 

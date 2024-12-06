@@ -39,8 +39,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::put('/users/update-balance', [UserController::class, 'updateBalance'])->name('users.update.balance');
     Route::get('transactions/screenshots', [TransactionController::class, 'screenshots'])->name('transactions.screenshots');
+    // Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
 
-// Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+
 // Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
 
 
